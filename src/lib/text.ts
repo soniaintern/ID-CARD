@@ -38,23 +38,11 @@ export function normalizeGender(value: string): string {
   return value.trim()
 }
 
+/** Excel me jo likha hai (small/capital) exactly wahi return karta hai */
 export function normalizeBloodGroup(value: string): string {
-  const raw = String(value ?? '').toUpperCase().replace(/\s+/g, '')
-  if (!raw) return ''
-  const map: Record<string, string> = {
-    APOSITIVE: 'A+',
-    ANEGATIVE: 'A-',
-    BPOSITIVE: 'B+',
-    BNEGATIVE: 'B-',
-    OPOSITIVE: 'O+',
-    ONEGATIVE: 'O-',
-    ABPOSITIVE: 'AB+',
-    ABNEGATIVE: 'AB-',
-  }
-  const compact = raw.replace(/[^A-Z+-]/g, '')
-  if (/^(A|B|O|AB)[+-]$/.test(compact)) return compact
-  const key = raw.replace(/[^A-Z]/g, '')
-  return map[key] ?? raw
+  return String(value ?? '')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 export function timestamp(): string {
